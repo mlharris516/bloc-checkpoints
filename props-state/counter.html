@@ -20,7 +20,17 @@
              number: 1
            }
          }
-
+         increment(event) {
+          this.setState({
+            number: this.state.number + 1
+          })
+        }
+ 
+        decrement(event) {
+          this.setState({
+            number: Math.max(1, this.state.number - 1)
+          })
+        }
         render() {
           return (
             <div>
