@@ -26,6 +26,7 @@ class App extends Component {
     //.slice() makes copy of array
     const todo = todos[index];
     todo.isCompleted = todo.isCompleted ? false : true;
+    // todo.isCompleted = !todo.isCompleted;
     //? is ternary operator and is usually shortcut for if statement
     this.setState({ todos: todos });
     //this.setState() changes component's state indirectly
@@ -37,13 +38,18 @@ class App extends Component {
     this.setState({ todos: [...this.state.todos, newTodo] });
   }
 
+  deleteTodo(index){
+    console.log('deleting item ',index);
+    this.setState({todos: this.state.todos.filter((todo,tIndex)=> tIndex !== index)})
+  }
+
   render() {
     return (
       //returns JSX
       <div className="App">
       <ul>
       { this.state.todos.map( (todo, index) => 
-        <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+        <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={() => this.deleteTodo(index)}/>
           //.map() used to display contents of array  - iterates through array and converts raw data into array of JSX elements 
            )}
          </ul>
@@ -54,6 +60,7 @@ class App extends Component {
        </div>
        //arrow function accepts e (event) as parameter and calls this.handleSubmit and passes it e
        //arrow function preserves value of this keyword
+       
      );
    }
  }
